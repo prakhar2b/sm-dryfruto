@@ -127,7 +127,7 @@ const Career = () => {
           </a>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

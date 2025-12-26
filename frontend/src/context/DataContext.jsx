@@ -21,7 +21,11 @@ export const DataProvider = ({ children }) => {
     phone: '9870990795',
     email: 'info@dryfruto.com',
     address: '123, Main Street, New Delhi, India',
-    whatsappLink: 'https://wa.me/919870990795'
+    whatsappLink: 'https://wa.me/919870990795',
+    facebookLink: '',
+    instagramLink: '',
+    twitterLink: '',
+    youtubeLink: ''
   });
   const [loading, setLoading] = useState(true);
 

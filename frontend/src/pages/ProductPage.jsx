@@ -6,12 +6,12 @@ import Footer from '../components/layout/Footer';
 import { useData } from '../context/DataContext';
 
 const sizeVariants = [
-  { label: "100 gram", multiplier: 1 },
-  { label: "250 gram", multiplier: 2.4 },
-  { label: "500 gram", multiplier: 4.5 },
-  { label: "1 kg", multiplier: 8.5 },
-  { label: "2 kg", multiplier: 16 },
-  { label: "5 kg", multiplier: 38 }
+  { key: '100g', label: "100 gram", multiplier: 1 },
+  { key: '250g', label: "250 gram", multiplier: 2.4 },
+  { key: '500g', label: "500 gram", multiplier: 4.5 },
+  { key: '1kg', label: "1 kg", multiplier: 8.5 },
+  { key: '2kg', label: "2 kg", multiplier: 16 },
+  { key: '5kg', label: "5 kg", multiplier: 38 }
 ];
 
 const ProductPage = () => {

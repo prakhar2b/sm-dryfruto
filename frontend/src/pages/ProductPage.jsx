@@ -41,7 +41,8 @@ const ProductPage = () => {
   const currentPrice = product.priceVariants?.[currentVariant.key] 
     ? product.priceVariants[currentVariant.key]
     : Math.round(product.basePrice * currentVariant.multiplier);
-  const whatsappLink = siteSettings.whatsappLink || `https://wa.me/91${siteSettings.phone}`;
+  // Always use phone number from settings for WhatsApp
+  const whatsappLink = `https://wa.me/91${siteSettings.phone?.replace(/\D/g, '')}`;
   const callLink = `tel:+91${siteSettings.phone}`;
 
   const handleWhatsApp = () => {

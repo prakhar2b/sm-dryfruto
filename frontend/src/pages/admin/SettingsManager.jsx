@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, MessageCircle, Briefcase } from 'lucide-react';
+import { Save, Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, MessageCircle, Briefcase, Package, Plus, X } from 'lucide-react';
 import axios from 'axios';
 import ImageUpload from '../../components/common/ImageUpload';
 
@@ -19,10 +19,21 @@ const SettingsManager = () => {
     facebookLink: '',
     instagramLink: '',
     twitterLink: '',
-    youtubeLink: ''
+    youtubeLink: '',
+    bulkOrderProductTypes: ['Dry Fruits', 'Nuts', 'Seeds', 'Berries', 'Gift Boxes', 'Mixed Products'],
+    bulkOrderBenefits: [
+      'Direct sourcing from farms ensures freshness',
+      'Minimum order quantity: 10 kg',
+      'Special rates for orders above 100 kg',
+      'Custom packaging with your branding',
+      'Regular supply contracts available',
+      'Quality testing certificates provided'
+    ]
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [newProductType, setNewProductType] = useState('');
+  const [newBenefit, setNewBenefit] = useState('');
 
   useEffect(() => {
     fetchSettings();

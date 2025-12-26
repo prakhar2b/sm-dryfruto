@@ -394,4 +394,105 @@ const ProductForm = ({ item, categories, onSave, onClose }) => {
   );
 };
 
+// Image Input Component with URL and Upload options
+const ImageInput = ({ value, onChange, placeholder, onAdd, showAddButton }) => {
+  const [mode, setMode] = useState('url');
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Please select a valid image file (JPEG, PNG, GIF, or WebP)');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await axios.post(`${API}/upload`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      const imageUrl = `${BACKEND_URL}${response.data.url}`;
+      onChange(imageUrl);
+      if (onAdd) onAdd();
+    } catch (err) {
+      console.error('Upload error:', err);
+      alert('Failed to upload image');
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="space-y-2">
+      <div className="flex gap-1 mb-1">
+        <button
+          type="button"
+          onClick={() => setMode('url')}
+          className={`flex items-center gap-1 px-2 py-1 text-xs rounded ${mode === 'url' ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+        >
+          <Link className="w-3 h-3" /> URL
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode('upload')}
+          className={`flex items-center gap-1 px-2 py-1 text-xs rounded ${mode === 'upload' ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+        >
+          <Upload className="w-3 h-3" /> Upload
+        </button>
+      </div>
+
+      {mode === 'url' ? (
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={value || ''}
+            onChange={(e) => onChange(e.target.value)}
+            className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
+            placeholder={placeholder}
+          />
+          {showAddButton && (
+            <button onClick={onAdd} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg">
+              Add
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="flex gap-2">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+            onChange={handleUpload}
+            className="hidden"
+            id={`upload-${Math.random()}`}
+          />
+          <label
+            htmlFor={fileInputRef.current?.id}
+            onClick={() => fileInputRef.current?.click()}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 border-2 border-dashed rounded-lg cursor-pointer ${uploading ? 'border-amber-300 bg-amber-50' : 'border-gray-300 hover:border-amber-400'}`}
+          >
+            {uploading ? (
+              <span className="text-amber-600">Uploading...</span>
+            ) : (
+              <span className="text-gray-600"><Upload className="w-4 h-4 inline mr-1" /> Click to upload</span>
+            )}
+          </label>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default ProductsManager;

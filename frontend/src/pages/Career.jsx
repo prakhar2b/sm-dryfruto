@@ -129,8 +129,9 @@ const Career = () => {
             Send Your Resume
           </a>
         </div>
-      </div>
-    </Layout>
+      </main>
+      <Footer />
+    </div>
   );
 };
 

@@ -105,13 +105,13 @@ const Header = () => {
           <div className="lg:hidden bg-[#2d1810] border-t border-amber-900">
             <div className="max-w-7xl mx-auto px-4 py-4">
               <nav className="flex flex-col gap-3">
-                <Link 
-                  to="/" 
+                <a 
+                  href="/" 
                   className="text-white hover:text-amber-300 py-2 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleHomeClick}
                 >
                   Home
-                </Link>
+                </a>
                 <div className="border-t border-amber-900 pt-2">
                   <p className="text-amber-400 text-sm font-medium mb-2">Shop</p>
                   {categories.map((cat) => (

@@ -16,6 +16,7 @@ import ProductsManager from "./pages/admin/ProductsManager";
 import SettingsManager from "./pages/admin/SettingsManager";
 import SubmissionsManager from "./pages/admin/SubmissionsManager";
 import AboutUsManager from "./pages/admin/AboutUsManager";
+import CSSManager from "./pages/admin/CSSManager";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path="submissions" element={<SubmissionsManager />} />
               <Route path="settings" element={<SettingsManager />} />
               <Route path="about-us" element={<AboutUsManager />} />
+              <Route path="css" element={<CSSManager />} />
             </Route>
           </Routes>
         </BrowserRouter>

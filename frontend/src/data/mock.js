@@ -234,9 +234,9 @@ export const products = [
     category: "makhana",
     type: "Makhana",
     basePrice: 175,
-    image: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF008",
     shortDescription: "Light and crunchy fox nuts, perfect for healthy snacking.",
@@ -257,9 +257,9 @@ export const products = [
     category: "nuts-dry-fruits",
     type: "Dried Fig",
     basePrice: 220,
-    image: "https://images.unsplash.com/photo-1601379760883-1bb497c558e4?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1601379760883-1bb497c558e4?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF009",
     shortDescription: "Soft and sweet Turkish dried figs, naturally delicious.",
@@ -280,9 +280,9 @@ export const products = [
     category: "seeds",
     type: "Pumpkin Seeds",
     basePrice: 125,
-    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF010",
     shortDescription: "Raw green pumpkin seeds, packed with zinc and magnesium.",
@@ -303,9 +303,9 @@ export const products = [
     category: "seeds",
     type: "Sunflower Seeds",
     basePrice: 95,
-    image: "https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/4750269/pexels-photo-4750269.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/4750269/pexels-photo-4750269.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF011",
     shortDescription: "Nutrient-rich sunflower seeds, great for heart health.",

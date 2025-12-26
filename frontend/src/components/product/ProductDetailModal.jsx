@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { X, Phone, MessageCircle, Heart, HeartHandshake, Truck, Shield, Check } from 'lucide-react';
-import { CONTACT_INFO, sizeVariants } from '../../data/mock';
+import { useData } from '../../context/DataContext';
+
+const sizeVariants = [
+  { label: "100 gram", multiplier: 1 },
+  { label: "250 gram", multiplier: 2.4 },
+  { label: "500 gram", multiplier: 4.5 },
+  { label: "1 kg", multiplier: 8.5 },
+  { label: "2 kg", multiplier: 16 },
+  { label: "5 kg", multiplier: 38 }
+];
 
 const ProductDetailModal = ({ product, isOpen, onClose }) => {
+  const { siteSettings } = useData();
   const [selectedSize, setSelectedSize] = useState(0);
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState(0);
@@ -10,14 +20,16 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
   if (!isOpen || !product) return null;
 
   const currentPrice = Math.round(product.basePrice * sizeVariants[selectedSize].multiplier);
+  const whatsappLink = siteSettings.whatsappLink || `https://wa.me/91${siteSettings.phone}`;
+  const callLink = `tel:+91${siteSettings.phone}`;
 
   const handleWhatsApp = () => {
     const message = `Hi, I'm interested in ${product.name} (${sizeVariants[selectedSize].label}) - ₹${currentPrice}`;
-    window.open(`${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`${whatsappLink}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleCall = () => {
-    window.open(CONTACT_INFO.callLink, '_self');
+    window.open(callLink, '_self');
   };
 
   return (
@@ -44,12 +56,12 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
             <div>
               <div className="aspect-square rounded-2xl overflow-hidden bg-gray-50 mb-4">
                 <img
-                  src={product.images[selectedImage] || product.image}
+                  src={product.images?.[selectedImage] || product.image}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
-              {product.images.length > 1 && (
+              {product.images && product.images.length > 1 && (
                 <div className="flex gap-3">
                   {product.images.map((img, index) => (
                     <button
@@ -112,7 +124,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-3 mb-6">
-                {product.features.map((feature, index) => (
+                {product.features?.map((feature, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                       <Check className="w-4 h-4 text-green-600" />
@@ -177,7 +189,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-4">Health Benefits</h3>
                   <ul className="space-y-3">
-                    {product.benefits.map((benefit, index) => (
+                    {product.benefits?.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Check className="w-4 h-4 text-green-600" />

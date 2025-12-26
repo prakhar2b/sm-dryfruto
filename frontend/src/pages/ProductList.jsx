@@ -5,9 +5,24 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import ProductCard from '../components/product/ProductCard';
 import ProductDetailModal from '../components/product/ProductDetailModal';
-import { products, categories, productTypes } from '../data/mock';
+import { useData } from '../context/DataContext';
+
+const productTypes = [
+  "Almonds",
+  "Cashews",
+  "Roasted Cashews",
+  "Walnuts",
+  "Raisins",
+  "Mix dry fruits",
+  "Pistachios",
+  "Makhana",
+  "Dried Fig",
+  "Pumpkin Seeds",
+  "Sunflower Seeds"
+];
 
 const ProductList = () => {
+  const { products, categories } = useData();
   const [searchParams] = useSearchParams();
   const categorySlug = searchParams.get('category');
   const searchQuery = searchParams.get('search');
@@ -59,7 +74,7 @@ const ProductList = () => {
     }
 
     return result;
-  }, [categorySlug, searchQuery, selectedType, priceRange, sortBy]);
+  }, [products, categorySlug, searchQuery, selectedType, priceRange, sortBy]);
 
   const currentCategory = categories.find(c => c.slug === categorySlug);
 

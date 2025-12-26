@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
-import { LOGO_URL, CONTACT_INFO, categories } from '../../data/mock';
+import { useData } from '../../context/DataContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { categories, siteSettings } = useData();
+
+  const LOGO_URL = siteSettings.logo || "https://customer-assets.emergentagent.com/job_70b8c44d-b0eb-46ab-b798-c90870274405/artifacts/5olvlaa7_WhatsApp%20Image%202025-12-26%20at%2013.46.33.jpeg";
+  const callLink = `tel:+91${siteSettings.phone}`;
 
   return (
     <header className="sticky top-0 z-50">
@@ -13,8 +17,8 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
-            <a href={CONTACT_INFO.callLink} className="hover:text-amber-300 transition-colors">
-              Call us: {CONTACT_INFO.phone}
+            <a href={callLink} className="hover:text-amber-300 transition-colors">
+              Call us: {siteSettings.phone}
             </a>
           </div>
           <div className="hidden md:flex items-center gap-4">
@@ -31,12 +35,12 @@ const Header = () => {
             <Link to="/" className="flex items-center gap-3">
               <img 
                 src={LOGO_URL} 
-                alt="DryFruto" 
+                alt={siteSettings.businessName} 
                 className="h-14 w-14 rounded-full object-cover border-2 border-amber-400"
               />
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-white">DryFruto</h1>
-                <p className="text-xs text-amber-300 italic">Live With Health</p>
+                <h1 className="text-xl font-bold text-white">{siteSettings.businessName}</h1>
+                <p className="text-xs text-amber-300 italic">{siteSettings.slogan}</p>
               </div>
             </Link>
 

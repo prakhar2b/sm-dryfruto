@@ -54,9 +54,9 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
-              <Link to="/" className="text-white hover:text-amber-300 transition-colors font-medium">
+              <a href="/" onClick={handleHomeClick} className="text-white hover:text-amber-300 transition-colors font-medium">
                 Home
-              </Link>
+              </a>
               <div className="relative group">
                 <button className="text-white hover:text-amber-300 transition-colors font-medium flex items-center gap-1">
                   Shop

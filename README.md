@@ -10,106 +10,181 @@ A full-stack e-commerce application for selling premium dry fruits, nuts, and se
 - **Server:** Nginx (Reverse Proxy)
 - **Containerization:** Docker + Docker Compose
 
-## Deploy on Hostinger VPS with Docker Manager
+---
 
-### Prerequisites
-- Hostinger VPS with Docker Manager enabled
-- GitHub repository with this code
-- Domain name pointed to your VPS IP (optional but recommended)
+## Quick Start (One Command)
 
-### Deployment Steps
+```bash
+# Clone the repository
+git clone https://github.com/prakhar2b/client-dryfruto.git
+cd client-dryfruto
 
-1. **Push code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
-   ```
-   Make sure all Docker files are in your repository root:
-   - `docker-compose.yml`
-   - `Dockerfile.backend`
-   - `Dockerfile.nginx`
-   - `nginx.conf`
+# Start the application
+./start.sh
+```
 
-2. **In Hostinger VPS Panel:**
-   - Go to **Docker** → **Docker Compose**
-   - Click **Create New**
-   - Select **From GitHub URL**
-   - Enter your repository URL: `https://github.com/YOUR_USERNAME/YOUR_REPO`
-   - Select branch: `main`
-   - Click **Deploy**
+Your site will be available at: **http://localhost** (or your server IP)
 
-3. **Wait for deployment**
-   - Hostinger will pull the code and run `docker-compose up -d --build`
-   - First deployment may take 5-10 minutes (downloading images, building)
+---
 
-4. **Access your site**
-   - Your site will be available at your VPS IP: `http://YOUR_VPS_IP`
-   - Or your domain: `http://your-domain.com`
-   - Admin panel: `http://your-domain/admin`
+## Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `./start.sh` | Build and start all services |
+| `./stop.sh` | Stop all running containers |
+| `./rebuild.sh` | Pull latest code and rebuild |
+
+---
+
+## Manual Docker Commands
+
+```bash
+# Build and start
+docker compose up -d --build
+
+# View logs
+docker compose logs -f
+
+# View specific service logs
+docker compose logs -f backend
+docker compose logs -f nginx
+docker compose logs -f mongodb
+
+# Stop all services
+docker compose down
+
+# Restart services
+docker compose restart
+
+# Rebuild without cache
+docker compose build --no-cache
+docker compose up -d
+```
+
+---
+
+## Project Structure
+
+```
+├── docker-compose.yml      # Main orchestration file
+├── Dockerfile.backend      # Backend image (FastAPI)
+├── Dockerfile.nginx        # Frontend image (React + Nginx)
+├── nginx.conf              # Nginx configuration
+├── start.sh                # Quick start script
+├── stop.sh                 # Stop script
+├── rebuild.sh              # Rebuild script
+├── backend/                # FastAPI backend code
+│   ├── server.py
+│   └── requirements.txt
+└── frontend/               # React frontend code
+    ├── src/
+    ├── package.json
+    └── craco.config.js
+```
+
+---
 
 ## Docker Services
 
-| Service | Description | Port |
-|---------|-------------|------|
-| nginx | Frontend + Reverse Proxy | 80 |
-| backend | FastAPI API Server | 8001 (internal) |
-| mongodb | Database | 27017 (internal) |
+| Service | Container Name | Internal Port | External Port |
+|---------|---------------|---------------|---------------|
+| MongoDB | dryfruto-mongodb | 27017 | - |
+| Backend | dryfruto-backend | 8001 | - |
+| Nginx | dryfruto-nginx | 80 | **80** |
 
-## Environment Variables
+---
 
-The following are configured automatically in docker-compose.yml:
+## Deploy on Hostinger VPS
 
-- `MONGO_URL` - MongoDB connection string
-- `DB_NAME` - Database name (dryfruto)
+### Option 1: Using Docker Manager (From GitHub)
 
-## Useful Docker Commands
+1. Push code to GitHub
+2. In Hostinger: **Docker → Docker Compose → Create New → From GitHub URL**
+3. Enter: `https://github.com/prakhar2b/client-dryfruto.git`
+4. Select branch: `main`
+5. Click **Deploy**
 
-SSH into your VPS and run:
+### Option 2: Manual Deployment via SSH
 
 ```bash
-# Check status
-docker-compose ps
+# SSH into your VPS
+ssh root@your-vps-ip
 
-# View logs
-docker-compose logs -f
+# Clone repository
+git clone https://github.com/prakhar2b/client-dryfruto.git
+cd client-dryfruto
 
-# Restart services
-docker-compose restart
-
-# Rebuild and restart
-docker-compose up -d --build
-
-# Stop all services
-docker-compose down
+# Start the application
+./start.sh
 ```
 
-## Updating Your Site
-
-1. Push changes to GitHub
-2. SSH into your VPS
-3. Navigate to your project directory
-4. Run:
-   ```bash
-   git pull origin main
-   docker-compose up -d --build
-   ```
+---
 
 ## Data Persistence
 
-The following data is persisted in Docker volumes:
+Docker volumes ensure your data persists across restarts:
+
 - `mongodb_data` - Database files
-- `uploads_data` - User uploaded images
+- `uploads_data` - Uploaded product images
+
+To backup data:
+```bash
+# Backup MongoDB
+docker exec dryfruto-mongodb mongodump --out /data/backup
+
+# Copy backup to host
+docker cp dryfruto-mongodb:/data/backup ./backup
+```
+
+---
+
+## Environment Variables
+
+Configured automatically in `docker-compose.yml`:
+
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `MONGO_URL` | `mongodb://mongodb:27017` | MongoDB connection |
+| `DB_NAME` | `dryfruto` | Database name |
+
+---
 
 ## Admin Panel
 
-Access the admin panel at `/admin` to:
+Access at: `http://your-domain/admin`
+
+Features:
 - Manage products and categories
 - Update hero slides and testimonials
-- Configure site settings
-- View form submissions
+- Configure site settings (phone, email, social links)
+- View form submissions (contact, bulk orders, careers)
 - Update About Us page content
+
+---
+
+## Troubleshooting
+
+### Build fails with cache error
+```bash
+docker builder prune -af
+./start.sh
+```
+
+### Container won't start
+```bash
+docker compose logs -f
+```
+
+### Reset everything
+```bash
+docker compose down -v
+docker system prune -af
+./start.sh
+```
+
+---
 
 ## Support
 
-For issues or questions, please create an issue in the GitHub repository.
+For issues, create a GitHub issue or contact support.

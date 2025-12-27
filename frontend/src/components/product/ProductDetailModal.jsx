@@ -72,7 +72,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                       key={index}
                       onClick={() => setSelectedImage(index)}
                       className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
-                        selectedImage === index ? 'border-amber-500' : 'border-gray-200'
+                        selectedImage === index ? 'border-emerald-500' : 'border-gray-200'
                       }`}
                     >
                       <img src={img} alt="" className="w-full h-full object-cover" />
@@ -101,7 +101,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                       onClick={() => setSelectedSize(index)}
                       className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                         selectedSize === index
-                          ? 'bg-amber-500 text-white'
+                          ? 'bg-emerald-500 text-white'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -113,15 +113,15 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
 
               {/* Price */}
               <div className="mb-6">
-                <p className="text-3xl font-bold text-amber-700">
+                <p className="text-3xl font-bold text-emerald-700">
                   ₹{currentPrice}.00
                 </p>
               </div>
 
               {/* Delivery Info */}
-              <div className="bg-amber-50 rounded-xl p-4 mb-6">
+              <div className="bg-emerald-50 rounded-xl p-4 mb-6">
                 <p className="text-sm text-gray-700">
-                  <strong className="text-amber-700">Swift Delivery -</strong> Shipping Across India. 
+                  <strong className="text-emerald-700">Swift Delivery -</strong> Shipping Across India. 
                   Bringing the goodness of dry fruits to your doorstep!
                 </p>
               </div>
@@ -149,7 +149,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                 </button>
                 <button
                   onClick={handleCall}
-                  className="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105"
+                  className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105"
                 >
                   <Phone className="w-5 h-5" />
                   Call Us
@@ -165,7 +165,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                 onClick={() => setActiveTab('description')}
                 className={`flex-1 py-4 text-center font-medium transition-colors ${
                   activeTab === 'description'
-                    ? 'text-amber-700 border-b-2 border-amber-500'
+                    ? 'text-emerald-700 border-b-2 border-emerald-500'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -175,7 +175,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
                 onClick={() => setActiveTab('benefits')}
                 className={`flex-1 py-4 text-center font-medium transition-colors ${
                   activeTab === 'benefits'
-                    ? 'text-amber-700 border-b-2 border-amber-500'
+                    ? 'text-emerald-700 border-b-2 border-emerald-500'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -210,19 +210,19 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
           {/* Bottom Features */}
           <div className="bg-gray-50 px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="flex items-center gap-2 text-sm">
-              <Shield className="w-5 h-5 text-amber-600" />
+              <Shield className="w-5 h-5 text-emerald-600" />
               <span className="text-gray-600">Premium Quality</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Truck className="w-5 h-5 text-amber-600" />
+              <Truck className="w-5 h-5 text-emerald-600" />
               <span className="text-gray-600">Swift Shipping</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <HeartHandshake className="w-5 h-5 text-amber-600" />
+              <HeartHandshake className="w-5 h-5 text-emerald-600" />
               <span className="text-gray-600">Easy Return</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Heart className="w-5 h-5 text-amber-600" />
+              <Heart className="w-5 h-5 text-emerald-600" />
               <span className="text-gray-600">24/7 Support</span>
             </div>
           </div>

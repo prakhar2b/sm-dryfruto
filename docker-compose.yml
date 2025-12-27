@@ -40,7 +40,7 @@ services:
     container_name: dryfruto-nginx
     restart: always
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - uploads_data:/var/www/uploads:ro
     depends_on:
